@@ -1,0 +1,12 @@
+{
+    "name": "sample-node",
+    "description": "A sample api for testing",
+    "author": "",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "express": "~2.5",
+        "mysql": "~2.0",
+        "mysql2": "^1.7.0"
+    }
+}

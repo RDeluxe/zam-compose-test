@@ -1,0 +1,49 @@
+version: "3.1"
+
+services:
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - ./migrations:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_DATABASE: example
+      MYSQL_USER: example
+      MYSQL_PASSWORD: example
+      MYSQL_ROOT_PASSWORD: example
+
+  api:
+    image: node:11-alpine
+    working_dir: /home/node/app
+    volumes:
+      - ./api-sample/:/home/node/app
+    ports:
+      - 3000:3000
+    environment:
+      MYSQL_HOST: db
+      MYSQL_USER: example
+      MYSQL_PASSWORD: example
+      MYSQL_DATABASE: example
+    links:
+      - db
+    command: "npm start"
+
+  venom:
+    build:
+      context: ./venom
+      dockerfile: Dockerfile
+    environment:
+      API_URL: api
+      API_PORT: 3000
+    volumes:
+      - ./venom/:/tests
+    command: "sh /wait-for.sh api:3000 -- venom run /tests/*"
+    links:
+      - api
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
