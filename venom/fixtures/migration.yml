@@ -1,0 +1,12 @@
+name: Title of TestSuite
+testcases:
+  - name: Load database fixtures
+    steps:
+      - type: dbfixtures
+        database: mysql
+        dsn: user:password@(localhost:3306)/venom?multiStatements=true
+        schemas:
+          - schemas/mysql.sql
+        folder: fixtures
+        files:
+          - fixtures/table.yml

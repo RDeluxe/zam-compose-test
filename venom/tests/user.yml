@@ -1,0 +1,22 @@
+name: User test suit
+testcases:
+  - name: GET http testcase, with 5 seconds timeout
+    steps:
+      - type: http
+        method: GET
+        #url: http://{{.API_URL}}:{{.API_PORT}}/users
+        url: http://localhost:3000/users
+        timeout: 5
+        assertions:
+          - result.statuscode ShouldEqual 200
+
+  - name: POST http testcase, with 5 seconds timeout
+    steps:
+      - type: http
+        method: POST
+        body: "looooool"
+        #url: http://{{.API_URL}}:{{.API_PORT}}/users
+        url: http://localhost:3000/users
+        timeout: 5
+        assertions:
+          - result.statuscode ShouldEqual 200
