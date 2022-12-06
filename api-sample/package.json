@@ -5,7 +5,7 @@
     "version": "0.0.1",
     "private": true,
     "dependencies": {
-        "express": "~2.5",
+        "express": "~4.17",
         "mysql": "~2.0",
         "mysql2": "^1.7.0"
     }
